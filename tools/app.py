@@ -210,15 +210,9 @@ def get_pretrains(string):
     return pretrains
 
 
-with gr.Blocks(title="🔊 RVC",theme=gr.themes.Soft(primary_hue="purple",neutral_hue="zinc")) as app:
-with app:
-    with gr.Tabs():
-        with gr.TabItem("RVC EASY INFERENCE"):
-            gr.Markdown(
-                value="""
-                RVC
-                """
-            )
+with gr.Blocks(theme=gr.themes.Soft(), title="RVC 💻") as app:
+    gr.HTML("<h1> The RVC EASY WEBUI 💻 </h1>")
+        
             sid = gr.Dropdown(label=i18n("推理音色"), choices=sorted(names))
           with gr.Column() as yt_link_col:
               song_input = gr.Text(label='Song input', info='Link to a song on YouTube or full path to a local file. For file upload, click the button below.')
