@@ -220,7 +220,10 @@ with app:
                 """
             )
             sid = gr.Dropdown(label=i18n("推理音色"), choices=sorted(names))
-        
+          with gr.Column() as yt_link_col:
+              song_input = gr.Text(label='Song input', info='Link to a song on YouTube or full path to a local file. For file upload, click the button below.')
+                        
+
             sid.change(fn=vc.get_vc, inputs=[sid], outputs=[spk_item])
             gr.Markdown(
                 value=i18n(
@@ -295,6 +298,7 @@ with app:
             but0.click(
                 vc.vc_single,
                 [
+                    song_input,
                     spk_item,
                     vc_input3,
                     vc_transform0,
