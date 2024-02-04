@@ -40,23 +40,14 @@ for root, dirs, files in os.walk(index_root, topdown=False):
 app = gr.Blocks()
 with app:
     with gr.Tabs():
-        with gr.TabItem("在线demo"):
+        with gr.TabItem("RVC EASY INFERENCE"):
             gr.Markdown(
                 value="""
-                RVC 在线demo
+                RVC
                 """
             )
             sid = gr.Dropdown(label=i18n("推理音色"), choices=sorted(names))
-            with gr.Column():
-                spk_item = gr.Slider(
-                    minimum=0,
-                    maximum=2333,
-                    step=1,
-                    label=i18n("请选择说话人id"),
-                    value=0,
-                    visible=False,
-                    interactive=True,
-                )
+        
             sid.change(fn=vc.get_vc, inputs=[sid], outputs=[spk_item])
             gr.Markdown(
                 value=i18n(
@@ -71,20 +62,11 @@ with app:
                 label=i18n(
                     "选择音高提取算法,输入歌声可用pm提速,harvest低音好但巨慢无比,crepe效果好但吃GPU"
                 ),
-                choices=["pm", "harvest", "crepe", "rmvpe"],
-                value="pm",
+                choices=["crepe", "rmvpe"],
+                value="rmvpe",
                 interactive=True,
             )
-            filter_radius0 = gr.Slider(
-                minimum=0,
-                maximum=7,
-                label=i18n(
-                    ">=3则使用对harvest音高识别的结果使用中值滤波，数值为滤波半径，使用可以削弱哑音"
-                ),
-                value=3,
-                step=1,
-                interactive=True,
-            )
+        
             with gr.Column():
                 file_index1 = gr.Textbox(
                     label=i18n("特征检索库文件路径,为空则使用下拉的选择结果"),
@@ -158,4 +140,4 @@ with app:
             )
 
 
-app.launch()
+app.launch(share=True)
